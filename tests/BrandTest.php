@@ -106,6 +106,43 @@
             $this->assertEquals([$test_brand, $test_brand2], $result);
         }
 
+        function test_deleteAll()
+        {
+            //Arrange
+            $name = "Doc Marten";
+            $test_brand = new Brand($name);
+            $test_brand->save();
+
+            $name2 = "Niwell";
+            $test_brand2 = new Brand($name2);
+            $test_brand2->save();
+
+            //Act
+            Brand::deleteAll();
+            $result = Brand::getAll();
+
+            //Assert
+            $this->assertEquals([], $result);
+        }
+
+        function test_find()
+        {
+            //Arrange
+            $name = "Doc Marten";
+            $test_brand = new Brand($name);
+            $test_brand->save();
+
+            $name2 = "Niwell";
+            $test_brand2 = new Brand($name2);
+            $test_brand2->save();
+
+            //Act
+            $result = Brand::find($test_brand->getId());
+
+            //Assert
+            $this->assertEquals($test_brand, $result);
+        }
+
 
 
 
