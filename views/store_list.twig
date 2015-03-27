@@ -1,0 +1,35 @@
+<html>
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <title>The Store List</title>
+</head>
+<body>
+    <div class="container">
+
+        <h1>Slippy Sam's Shoes and Slippers</h1>
+        <h3>All Stores list</h3>
+
+        <h5>Create a new store here</h5>
+        <form action="/create_store" method="post">
+            <div class="form-group">
+                <label for="store">Store name:</label>
+                <input type="text" name="store" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Add store</button>
+        </form>
+
+
+        {% if stores is not empty %}
+
+            {% for store in stores %}
+                <ul>
+                    <li><a href="/store/{{ store.getId }}">{{ store.getName }}</a></li>
+                </ul>
+            {% endfor %}
+        {% else %}
+            <h4>There are no stores listed yet</h4>
+        {% endif %}
+
+    </div>
+</body>
+</html>
