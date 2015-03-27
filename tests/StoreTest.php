@@ -6,6 +6,7 @@
     */
 
     require_once "src/Store.php";
+    require_once "src/Brand.php";
 
     $DB = new PDO('pgsql:host=localhost;dbname=shoes_test');
 
@@ -14,6 +15,7 @@
         protected function tearDown()
         {
             Store::deleteAll();
+            Brand::deleteAll();
         }
 
         function test_getName()
@@ -179,7 +181,50 @@
             $this->assertEquals($new_name, $test_store->getName());
         }
 
+        function test_addBrand()
+        {
+            //Arrange
+            $name = "Doc Marten Depo";
+            $test_store = new Store($name);
+            $test_store->save();
 
+            $name1 = "Doc Marten";
+            $test_brand = new Brand($name1);
+            $test_brand->save();
+
+            //Act
+            $test_store->addBrand($test_brand);
+
+            //Assert
+            $result = $test_store->getBrands();
+            $this->assertEquals([$test_brand], $result);
+
+        }
+
+        function test_getBrands()
+        {
+            //Arrange
+            $name = "Doc Marten Depo";
+            $test_store = new Store($name);
+            $test_store->save();
+
+            $name1 = "Doc Marten";
+            $test_brand = new Brand($name1);
+            $test_brand->save();
+
+            $name2 = "Niwell";
+            $test_brand2 = new Brand($name2);
+            $test_brand2->save();
+
+            $test_store->addBrand($test_brand);
+            $test_store->addBrand($test_brand2);
+
+            //Act
+            $result = $test_store->getBrands();
+
+            //Assert
+            $this->assertEquals([$test_brand, $test_brand2], $result);
+        }
 
 
 
