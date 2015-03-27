@@ -13,6 +13,7 @@
     {
         protected function tearDown()
         {
+            Store::deleteAll();
             Brand::deleteAll();
         }
 
@@ -141,6 +142,50 @@
 
             //Assert
             $this->assertEquals($test_brand, $result);
+        }
+
+        function test_addStore()
+        {
+            //Arrange
+            $name = "Doc Marten";
+            $test_brand = new Brand($name);
+            $test_brand->save();
+
+            $name1 = "Doc Marten Depo";
+            $test_store = new Store($name1);
+            $test_store->save();
+
+            //Act
+            $test_brand->addStore($test_store);
+
+            //Assert
+            $result = $test_brand->getStores();
+            $this->assertEquals([$test_store], $result);
+        }
+
+        function test_getStores()
+        {
+            //Arrange
+            $name = "Doc Marten";
+            $test_brand = new Brand($name);
+            $test_brand->save();
+
+            $name1 = "Doc Marten Depo";
+            $test_store = new Store($name1);
+            $test_store->save();
+
+            $name2 = "Koss";
+            $test_store2 = new Store($name2);
+            $test_store2->save();
+
+            $test_brand->addStore($test_store);
+            $test_brand->addStore($test_store2);
+
+            //Act
+            $result = $test_brand->getStores();
+
+            //Assert
+            $this->assertEquals([$test_store, $test_store2], $result);
         }
 
 
