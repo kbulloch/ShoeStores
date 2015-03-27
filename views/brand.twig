@@ -23,6 +23,7 @@
         </form>
 
         {% if stores is not empty %}
+            <h4>We are proud to be stocked in these stores</h4>
             {% for store in stores %}
                 <ul>
                     <li><a href="/store/{{ store.getId }}">{{ store.getName }}</a></li>
