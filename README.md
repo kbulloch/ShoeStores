@@ -2,8 +2,6 @@
 
 ###Assessment 4, Epicodus 03.27.2015
 
-//description
-
 #####Description
 This app lists shoe stores and their brands, using many to many relationship in
 SQL databases.  A store can have many shoe brands and a brand can be stocked at
@@ -43,6 +41,9 @@ CREATE TABLE brands_stores (id serial PRIMARY KEY, brand_id int, store_id int);
 CREATE DATABASE shoes_test WITH TEMPLATE shoes;
 
 \c shoes_test;
+
+You should now be able to open a browser and point it to localhost:8000 to
+see the shoe store site.
 
 -----
 
