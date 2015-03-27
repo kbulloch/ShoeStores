@@ -1,6 +1,9 @@
 #Shoe Stores
 
 ###Assessment 4, Epicodus 03.27.2015
+#####By Kyle Bulloch
+
+-----
 
 #####Description
 This app lists shoe stores and their brands, using many to many relationship in
