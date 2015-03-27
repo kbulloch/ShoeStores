@@ -31,7 +31,7 @@
             $this->id = (int) $new_id;
         }
 
-        function save()
+        function save() //CREATE
         {
             $statement = $GLOBALS['DB']->query("INSERT INTO stores (name)
                                                 VALUES ('{$this->getName()}')
@@ -40,14 +40,14 @@
             $this->setId($result['id']);
         }
 
-        function update($new_name)
+        function update($new_name) //UPDATE
         {
             $GLOBALS['DB']->exec("UPDATE stores SET name = '{$new_name}'
                                   WHERE id = {$this->getId()};");
             $this->setName($new_name);
         }
 
-        function delete()
+        function delete() //DESTROY
         {
             $GLOBALS['DB']->exec("DELETE FROM stores WHERE id = {$this->getId()};");
         }
@@ -75,7 +75,7 @@
                             VALUES ({$new_brand->getId()}, {$this->getId()});");
         }
 
-        static function getAll()
+        static function getAll() //READ ALL
         {
             $returned_stores = $GLOBALS['DB']->query("SELECT * FROM stores;");
             $stores = [];
@@ -88,12 +88,12 @@
             return $stores;
         }
 
-        static function deleteAll()
+        static function deleteAll() //DESTROY ALL
         {
             $GLOBALS['DB']->exec("DELETE FROM stores *;");
         }
 
-        static function find($search_id)
+        static function find($search_id) //READ SINGLE
         {
             $found_store = null;
             $stores = Store::getAll();
@@ -105,31 +105,5 @@
             }
             return $found_store;
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 ?>
