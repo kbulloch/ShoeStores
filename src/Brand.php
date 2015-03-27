@@ -46,25 +46,6 @@
             }
         }
 
-        function addStore($new_store)
-        {
-            //check for existing store
-            //to avoid duplicate entries in database
-            $existing_store = Store::findByName($new_store->getName());
-
-            if($existing_store == null){
-                $new_store->save();
-                $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id)
-                                      VALUES ({$this->getId()}, {$new_store->getId()});");
-            }
-            else {
-                $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id)
-                                      VALUES ({$this->getId()}, {$existing_store->getId()});");
-            }
-
-
-        }
-
         function getStores()
         {
             $stores = array();
@@ -79,6 +60,40 @@
                 array_push($stores, $new_store);
             }
             return $stores;
+        }
+
+        function notInStore($a_store)
+        {
+            //checks if a given brand name has already been listed at $this store
+            $stores_stocking = $this->getStores();
+            $check_name = $a_store->getName();
+            foreach($stores_stocking as $element){
+                if($element->getName() == $check_name) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function addStore($new_store)
+        {
+            //check for existing store
+            //to avoid duplicate entries in database
+            $existing_store = Store::findByName($new_store->getName());
+
+            if($existing_store == null){
+                $new_store->save();
+                $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id)
+                                      VALUES ({$this->getId()}, {$new_store->getId()});");
+            }
+            else {
+                if ($this->notInStore($new_store)) {
+                $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id)
+                                      VALUES ({$this->getId()}, {$existing_store->getId()});");
+                }
+            }
+
+
         }
 
         static function getAll() //READ ALL

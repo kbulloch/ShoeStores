@@ -75,7 +75,7 @@
             return $brands;
         }
 
-        function notInStore($a_brand)
+        function notStocking($a_brand)
         {
             //checks if a given brand name has already been listed at $this store
             $brands_listed = $this->getBrands();
@@ -101,7 +101,7 @@
                                       VALUES ({$new_brand->getId()}, {$this->getId()});");
             }
             else {
-                if ($this->notInStore($new_brand)) {
+                if ($this->notStocking($new_brand)) {
                     $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id)
                                           VALUES ({$existing_brand->getId()}, {$this->getId()});");
                 }
