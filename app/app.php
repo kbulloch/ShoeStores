@@ -23,7 +23,7 @@
     //all stores view
     $app->get("/all_stores", function() use ($app) {
         $stores = Store::getAll();
-        return $app['twig']->render('store_list.twig', array('stores' => $stores));
+        return $app['twig']->render('store_list.twig', array('stores'=>$stores));
     });
 
     $app->post("/create_store", function() use ($app) {
@@ -31,7 +31,13 @@
         $new_store = new Store($name);
         $new_store->save();
         $stores = Store::getAll();
-        return $app['twig']->render('store_list.twig', array('stores' => $stores));
+        return $app['twig']->render('store_list.twig', array('stores'=>$stores));
+    });
+
+    $app->get("/store/{id}", function($id) use ($app) {
+        $store = Store::find($id);
+        $brands = $store->getBrands();
+        return $app['twig']->render('store.twig', array('store'=>$store, 'brands'=>$brands));
     });
 
     return $app;

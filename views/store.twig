@@ -1,0 +1,22 @@
+<html>
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <title>The {{ store.getName }} Page</title>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ store.getName }}</h1>
+
+        {% if brands is not empty %}
+            <h4>We are proud to carry these brands:</h4>
+            {% for brand in brands %}
+                <ul>
+                    <li><a href="/brand/{{ brand.getId }}">{{ brand.getName }}</a></li>
+                </ul>
+            {% endfor %}
+        {% else %}
+            <h4>This store carries no brands yet</h4>
+        {% endif %}
+    </div>
+</body>
+</html>
