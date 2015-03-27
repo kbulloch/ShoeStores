@@ -7,14 +7,14 @@
 
     require_once "src/Brand.php";
 
-    // $DB = new PDO('pgsql:host=localhost;dbname=shoe_stores_test');
+    $DB = new PDO('pgsql:host=localhost;dbname=shoe_stores_test');
 
     class BrandTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Brand::deleteAll();
-        // }
+        protected function tearDown()
+        {
+            Brand::deleteAll();
+        }
 
         function test_getName()
         {
@@ -72,5 +72,66 @@
             $result = $test_brand->getId();
             $this->assertEquals(222, $result);
         }
+
+        function test_save()
+        {
+            //Arrange
+            $name = "Doc Marten";
+            $test_brand = new Brand($name);
+
+            //Act
+            $test_brand->save();
+
+            //Assert
+            $result = Brand::getAll();
+            $this->assertEquals($test_brand, $result[0]);
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $name = "Doc Marten";
+            $test_brand = new Brand($name);
+            $test_brand->save();
+
+            $name2 = "Niwell";
+            $test_brand2 = new Brand($name2);
+            $test_brand2->save();
+
+
+            //Act
+            $result = Brand::getAll();
+
+            //Assert
+            $this->assertEquals([$test_brand, $test_brand2], $result);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 ?>
