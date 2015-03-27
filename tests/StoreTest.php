@@ -7,7 +7,7 @@
 
     require_once "src/Store.php";
 
-    $DB = new PDO('pgsql:host=localhost;dbname=shoe_stores_test');
+    $DB = new PDO('pgsql:host=localhost;dbname=shoes_test');
 
     class StoreTest extends PHPUnit_Framework_TestCase
     {
