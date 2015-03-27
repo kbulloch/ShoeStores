@@ -11,10 +11,10 @@
 
     class StoreTest extends PHPUnit_Framework_TestCase
     {
-        // protected function tearDown()
-        // {
-        //     Store::deleteAll();
-        // }
+        protected function tearDown()
+        {
+            Store::deleteAll();
+        }
 
         function test_getName()
         {
@@ -72,39 +72,39 @@
             $result = $test_store->getId();
             $this->assertEquals(222, $result);
         }
-        //
-        // function test_save()
-        // {
-        //     //Arrange
-        //     $name = "Doc Marten Depo";
-        //     $test_store = new Store($name);
-        //
-        //     //Act
-        //     $test_store->save();
-        //
-        //     //Assert
-        //     $result = Store::getAll();
-        //     $this->assertEquals($test_store, $result[0]);
-        // }
-        //
-        // function test_getAll()
-        // {
-        //     //Arrange
-        //     $name = "Doc Marten Depo";
-        //     $test_store = new Store($name);
-        //     $test_store->save();
-        //
-        //     $name2 = "Crudley";
-        //     $test_store2 = new Store($name2);
-        //     $test_store2->save();
-        //
-        //
-        //     //Act
-        //     $result = Store::getAll();
-        //
-        //     //Assert
-        //     $this->assertEquals([$test_store, $test_store2], $result);
-        // }
+
+        function test_save()
+        {
+            //Arrange
+            $name = "Doc Marten Depo";
+            $test_store = new Store($name);
+
+            //Act
+            $test_store->save();
+
+            //Assert
+            $result = Store::getAll();
+            $this->assertEquals($test_store, $result[0]);
+        }
+
+        function test_getAll()
+        {
+            //Arrange
+            $name = "Doc Marten Depo";
+            $test_store = new Store($name);
+            $test_store->save();
+
+            $name2 = "Crudley";
+            $test_store2 = new Store($name2);
+            $test_store2->save();
+
+
+            //Act
+            $result = Store::getAll();
+
+            //Assert
+            $this->assertEquals([$test_store, $test_store2], $result);
+        }
 
 
 
