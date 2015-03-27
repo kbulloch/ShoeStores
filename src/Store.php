@@ -75,6 +75,19 @@
             return $brands;
         }
 
+        function notInStore($a_brand)
+        {
+            //checks if a given brand name has already been listed at $this store
+            $brands_listed = $this->getBrands();
+            $check_name = $a_brand->getName();
+            foreach($brands_listed as $element){
+                if($element->getName() == $check_name) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         function addBrand($new_brand)
         {
 
@@ -88,8 +101,10 @@
                                       VALUES ({$new_brand->getId()}, {$this->getId()});");
             }
             else {
-                $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id)
-                                      VALUES ({$existing_brand->getId()}, {$this->getId()});");
+                if ($this->notInStore($new_brand)) {
+                    $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id)
+                                          VALUES ({$existing_brand->getId()}, {$this->getId()});");
+                }
             }
         }
 

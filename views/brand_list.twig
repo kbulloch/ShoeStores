@@ -14,14 +14,32 @@
     <div class="container">
         <h1>List of all Shoe Brands</h1>
 
+        <form action="/create_brand" method="post">
+            <div class="form-group">
+                <label for="brand">Create a new brand</label>
+                <input type="text" name="brand" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Create</button>
+        </form>
+
         {% if brands is not empty %}
+
             {% for brand in brands %}
                 <ul>
                     <li><a href="/brand/{{ brand.getId }}">{{ brand.getName }}</a></li>
                 </ul>
             {% endfor %}
+
+            <form action="/confirm_delete_brands" method="get">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-warning">Clear Brands List</button>
+                </div>
+            </form>
+
         {% else %}
+
             <h4>There are no brands listed yet</h4>
+
         {% endif %}
     </div>
 </body>

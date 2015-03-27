@@ -65,6 +65,7 @@
         $brand = Brand::find($id);
         $store = $_POST['store'];
         $new_store = new Store($store);
+        $new_store->save();
         $brand->addStore($new_store);
         $stores = $brand->getStores();
         return $app['twig']->render('brand.twig', array('stores'=>$stores, 'brand'=>$brand));
@@ -88,8 +89,26 @@
         return $app['twig']->render('brand_list.twig', array('brands'=>$brands));
     });
 
+    //create a new brand
+    $app->post("/create_brand", function() use ($app) {
+        $name = $_POST['brand'];
+        $new_brand = new Brand($name);
+        $new_brand->save();
+        $brands = Brand::getAll();
+        return $app['twig']->render('brand_list.twig', array('brands'=>$brands));
+    });
 
+    //cofirmation page to clear brand list
+    $app->get("/confirm_delete_brands", function() use ($app) {
+        return $app['twig']->render('confirm_delete_brands.twig');
+    });
 
+    //clear brand list
+    $app->delete("/delete_all_brands", function() use ($app) {
+        Brand::deleteAll();
+        $brands = Brand::getAll();
+        return $app['twig']->render('brand_list.twig', array('brands'=>$brands));
+    });
 
 
 
