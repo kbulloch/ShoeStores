@@ -33,11 +33,17 @@
 
         function save() //CREATE
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO brands (name)
-                                                VALUES ('{$this->getName()}')
-                                                RETURNING id;");
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            $this->setId($result['id']);
+            //check for existing brand before creating a new one
+            //do not save to database if already existing
+            $existing_brand = Brand::findByName($this->getName());
+
+            if($existing_brand == null){
+                $statement = $GLOBALS['DB']->query("INSERT INTO brands (name)
+                                                    VALUES ('{$this->getName()}')
+                                                    RETURNING id;");
+                $result = $statement->fetch(PDO::FETCH_ASSOC);
+                $this->setId($result['id']);
+            }
         }
 
         function addStore($new_store)
@@ -101,6 +107,19 @@
                 $brand_id = $my_brand->getId();
                 if ($brand_id == $search_id) {
                     $found_brand = $my_brand;
+                }
+            }
+            return $found_brand;
+        }
+
+        static function findByName($search_name)
+        {
+            $found_brand = null;
+            $all_brands = Brand::getAll();
+            foreach($all_brands as $brand){
+                $brand_name = $brand->getName();
+                if ($brand_name == $search_name){
+                    $found_brand = $brand;
                 }
             }
             return $found_brand;

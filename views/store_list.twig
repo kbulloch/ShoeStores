@@ -6,16 +6,16 @@
 <body>
     <nav class="navbar navbar-default navbar-top">
         <div class="container">
-            <h5><a href="/">Home</a> |
+            <h4><a href="/">Home</a> |
                 <a href="/all_stores">Stores</a> |
-                <a href="/all_brands">Brands</a> </h5>
+                <a href="/all_brands">Brands</a> </h4>
         </div>
     </nav>
 
     <div class="container">
 
         <h1>Slippy Sam's Shoes and Slippers</h1>
-        <h3>All Stores list</h3>
+        <h4>All Stores list</h3>
 
         <h5>Create a new store here</h5>
         <form action="/create_store" method="post">
@@ -35,7 +35,7 @@
                 </ul>
             {% endfor %}
 
-            <form action="/delete_all_stores" method="post">
+            <form action="/confirm_delete_stores" method="get">
                 <div class="form-group">
                     <button type="submit" class="btn btn-warning">Clear Store List</button>
                 </div>

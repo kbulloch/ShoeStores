@@ -33,11 +33,17 @@
 
         function save() //CREATE
         {
-            $statement = $GLOBALS['DB']->query("INSERT INTO stores (name)
-                                                VALUES ('{$this->getName()}')
-                                                RETURNING id;");
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            $this->setId($result['id']);
+            //check for existing store before saving a new one
+            //do not save to database if already existing
+            $existing_store = Store::findByName($this->getName());
+
+            if($existing_store == null){
+                $statement = $GLOBALS['DB']->query("INSERT INTO stores (name)
+                                                    VALUES ('{$this->getName()}')
+                                                    RETURNING id;");
+                $result = $statement->fetch(PDO::FETCH_ASSOC);
+                $this->setId($result['id']);
+            }
         }
 
         function update($new_name) //UPDATE
@@ -71,8 +77,20 @@
 
         function addBrand($new_brand)
         {
-            $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id)
-                            VALUES ({$new_brand->getId()}, {$this->getId()});");
+
+            //check for existing store
+            //to avoid duplicate entries in database
+            $existing_brand = Brand::findByName($new_brand->getName());
+
+            if($existing_brand == null){
+                $new_brand->save();
+                $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id)
+                                      VALUES ({$new_brand->getId()}, {$this->getId()});");
+            }
+            else {
+                $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id)
+                                      VALUES ({$existing_brand->getId()}, {$this->getId()});");
+            }
         }
 
         static function getAll() //READ ALL
@@ -109,7 +127,7 @@
         static function findByName($search_name)
         {
             $found_store = null;
-            $all_stores = Category::getAll();
+            $all_stores = Store::getAll();
             foreach($all_stores as $store){
                 $store_name = $store->getName();
                 if ($store_name == $search_name){

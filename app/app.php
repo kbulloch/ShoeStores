@@ -70,10 +70,23 @@
         return $app['twig']->render('brand.twig', array('stores'=>$stores, 'brand'=>$brand));
     });
 
+    //cofirmation page to clear store list
+    $app->get("/confirm_delete_stores", function() use ($app) {
+        return $app['twig']->render('confirm_delete_stores.twig');
+    });
 
+    //clear store list
+    $app->delete("/delete_all_stores", function() use ($app) {
+        Store::deleteAll();
+        $stores = Store::getAll();
+        return $app['twig']->render('store_list.twig', array('stores'=>$stores));
+    });
 
-
-
+    //view all brands
+    $app->get("/all_brands", function() use ($app) {
+        $brands = Brand::getAll();
+        return $app['twig']->render('brand_list.twig', array('brands'=>$brands));
+    });
 
 
 

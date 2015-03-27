@@ -1,0 +1,24 @@
+<html>
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <title></title>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-top">
+        <div class="container">
+            <h4><a href="/">Home</a> |
+                <a href="/all_stores">Stores</a> |
+                <a href="/all_brands">Brands</a> </h4>
+        </div>
+    </nav>
+        <h4>Are you sure you want to delete all stores?</h4>
+        <form action="/delete_all_stores" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn btn-danger">Yes, delete them</button>
+        </form>
+        <form action="/all_stores" method="get">
+            <button type="submit" class="btn btn">Nevermind</button>
+        </form>
+    </div>
+</body>
+</html>

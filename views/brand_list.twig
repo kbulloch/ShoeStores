@@ -1,7 +1,7 @@
 <html>
 <head>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <title>Shoe Stores</title>
+    <title></title>
 </head>
 <body>
     <nav class="navbar navbar-default navbar-top">
@@ -12,9 +12,17 @@
         </div>
     </nav>
     <div class="container">
-        <h1>The Shoe Store Site</h1><br>
-        <h4><a href="/all_stores">View The Stores</a></h4>
-        <h4><a href="/all_brands">View All Shoe Brands</a></h4>
+        <h1>List of all Shoe Brands</h1>
+
+        {% if brands is not empty %}
+            {% for brand in brands %}
+                <ul>
+                    <li><a href="/brand/{{ brand.getId }}">{{ brand.getName }}</a></li>
+                </ul>
+            {% endfor %}
+        {% else %}
+            <h4>There are no brands listed yet</h4>
+        {% endif %}
     </div>
 </body>
 </html>
