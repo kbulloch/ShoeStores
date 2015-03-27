@@ -44,34 +44,34 @@
             $this->assertEquals($new_name, $test_store->getName());
         }
 
-        // function test_getId()
-        // {
-        //     //Arrange
-        //     $name = "Doc Marten Depo";
-        //     $id = 777;
-        //     $test_store = new Store($name, $id);
-        //
-        //     //Act
-        //     $result = $test_store->getId();
-        //
-        //     //Assert
-        //     $this->assertEquals(777, $result);
-        // }
-        //
-        // function test_setId()
-        // {
-        //     //Arrange
-        //     $name = "Doc Marten Depo";
-        //     $id = 777;
-        //     $test_store = new Store($name, $id);
-        //
-        //     //Act
-        //     $test_store->setId(222);
-        //
-        //     //Assert
-        //     $result = $test_store->getId();
-        //     $this->assertEquals(222, $result);
-        // }
+        function test_getId()
+        {
+            //Arrange
+            $name = "Doc Marten Depo";
+            $id = 777;
+            $test_store = new Store($name, $id);
+
+            //Act
+            $result = $test_store->getId();
+
+            //Assert
+            $this->assertEquals(777, $result);
+        }
+
+        function test_setId()
+        {
+            //Arrange
+            $name = "Doc Marten Depo";
+            $id = 777;
+            $test_store = new Store($name, $id);
+
+            //Act
+            $test_store->setId(222);
+
+            //Assert
+            $result = $test_store->getId();
+            $this->assertEquals(222, $result);
+        }
         //
         // function test_save()
         // {
