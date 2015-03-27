@@ -26,6 +26,12 @@
         return $app['twig']->render('store_list.twig', array('stores'=>$stores));
     });
 
+    //view all brands
+    $app->get("/all_brands", function() use ($app) {
+        $brands = Brand::getAll();
+        return $app['twig']->render('brand_list.twig', array('brands'=>$brands));
+    });
+
     //create a store
     $app->post("/create_store", function() use ($app) {
         $name = $_POST['store'];
@@ -35,11 +41,27 @@
         return $app['twig']->render('store_list.twig', array('stores'=>$stores));
     });
 
+    //create a new brand
+    $app->post("/create_brand", function() use ($app) {
+        $name = $_POST['brand'];
+        $new_brand = new Brand($name);
+        $new_brand->save();
+        $brands = Brand::getAll();
+        return $app['twig']->render('brand_list.twig', array('brands'=>$brands));
+    });
+
     //single store view
     $app->get("/store/{id}", function($id) use ($app) {
         $store = Store::find($id);
         $brands = $store->getBrands();
         return $app['twig']->render('store.twig', array('store'=>$store, 'brands'=>$brands));
+    });
+
+    //view single brand
+    $app->get("/brand/{id}", function($id) use ($app) {
+        $brand = Brand::find($id);
+        $stores = $brand->getStores();
+        return $app['twig']->render('brand.twig', array('stores'=>$stores, 'brand'=>$brand));
     });
 
     //Add a brand to a particular store, from that stores page
@@ -51,13 +73,6 @@
         $store->addBrand($new_brand);
         $brands = $store->getBrands();
         return $app['twig']->render('store.twig', array('store'=>$store, 'brands'=>$brands));
-    });
-
-    //view single brand
-    $app->get("/brand/{id}", function($id) use ($app) {
-        $brand = Brand::find($id);
-        $stores = $brand->getStores();
-        return $app['twig']->render('brand.twig', array('stores'=>$stores, 'brand'=>$brand));
     });
 
     //add a new store listing in a particular brand page
@@ -81,21 +96,6 @@
         Store::deleteAll();
         $stores = Store::getAll();
         return $app['twig']->render('store_list.twig', array('stores'=>$stores));
-    });
-
-    //view all brands
-    $app->get("/all_brands", function() use ($app) {
-        $brands = Brand::getAll();
-        return $app['twig']->render('brand_list.twig', array('brands'=>$brands));
-    });
-
-    //create a new brand
-    $app->post("/create_brand", function() use ($app) {
-        $name = $_POST['brand'];
-        $new_brand = new Brand($name);
-        $new_brand->save();
-        $brands = Brand::getAll();
-        return $app['twig']->render('brand_list.twig', array('brands'=>$brands));
     });
 
     //cofirmation page to clear brand list
