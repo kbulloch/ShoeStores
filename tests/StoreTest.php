@@ -163,7 +163,21 @@
             $this->assertEquals([$test_store2], $result);
         }
 
+        function test_update()
+        {
+            //Arrange
+            $name = "Doc Marten Depo";
+            $test_store = new Store($name);
+            $test_store->save();
 
+            $new_name = "Crudley";
+
+            //Act
+            $test_store->update($new_name);
+
+            //Assert
+            $this->assertEquals($new_name, $test_store->getName());
+        }
 
 
 
