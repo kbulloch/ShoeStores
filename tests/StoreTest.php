@@ -144,6 +144,25 @@
             $this->assertEquals($test_store, $result);
         }
 
+        function test_delete()
+        {
+            //Arrange
+            $name = "Doc Marten Depo";
+            $test_store = new Store($name);
+            $test_store->save();
+
+            $name2 = "Crudley";
+            $test_store2 = new Store($name2);
+            $test_store2->save();
+
+            //Act
+            $test_store->delete();
+
+            //Assert
+            $result = Store::getAll();
+            $this->assertEquals([$test_store2], $result);
+        }
+
 
 
 
