@@ -139,28 +139,5 @@
         return $app['twig']->render('store_list.twig', array('stores'=>$stores));
     });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     return $app;
 ?>

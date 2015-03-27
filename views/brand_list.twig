@@ -12,7 +12,7 @@
         </div>
     </nav>
     <div class="container">
-        <h1>List of all Shoe Brands</h1>
+        <h1>Slippy Sam's Shoe Brands</h1>
 
         <form action="/create_brand" method="post">
             <div class="form-group">
@@ -26,7 +26,7 @@
 
             {% for brand in brands %}
                 <ul>
-                    <li><a href="/brand/{{ brand.getId }}">{{ brand.getName }}</a></li>
+                    <li><h4><a href="/brand/{{ brand.getId }}">{{ brand.getName }}</a></h4></li>
                 </ul>
             {% endfor %}
 

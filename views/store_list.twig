@@ -14,7 +14,7 @@
 
     <div class="container">
 
-        <h1>All Stores list</h1>
+        <h1>Slippy Sam's Stores</h1>
 
         <form action="/create_store" method="post">
             <div class="form-group">
@@ -30,7 +30,7 @@
 
             {% for store in stores %}
                 <ul>
-                    <li><a href="/store/{{ store.getId }}">{{ store.getName }}</a></li>
+                    <li><h4><a href="/store/{{ store.getId }}">{{ store.getName }}</a></h4></li>
                 </ul>
             {% endfor %}
 
