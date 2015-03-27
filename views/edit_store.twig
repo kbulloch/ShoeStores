@@ -1,0 +1,35 @@
+<html>
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <title></title>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-top">
+        <div class="container">
+            <h4><a href="/">Home</a> |
+                <a href="/all_stores">Stores</a> |
+                <a href="/all_brands">Brands</a> </h4>
+        </div>
+    </nav>
+    <div class="container">
+
+        <h1><em>Edit</em> {{ store.getName }}</h1>
+
+        <form action="/store/{{ store.getId }}" method="post">
+            <div class="form-group">
+                <input type="hidden" name="_method" value="patch">
+                <label for="new_name">New store name</label>
+                <input type="text" name="new_name" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-info">Submit</button>
+        </form>
+
+        <form action="/confirm_delete_store/{{ store.getId }}" method="get">
+            <div class="form-group">
+                <button class="btn btn-warning">Delete Store</button>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

@@ -14,13 +14,11 @@
 
     <div class="container">
 
-        <h1>Slippy Sam's Shoes and Slippers</h1>
-        <h4>All Stores list</h3>
+        <h1>All Stores list</h1>
 
-        <h5>Create a new store here</h5>
         <form action="/create_store" method="post">
             <div class="form-group">
-                <label for="store">Store name:</label>
+                <label for="store">Create a new store</label>
                 <input type="text" name="store" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Add store</button>
@@ -28,6 +26,7 @@
 
 
         {% if stores is not empty %}
+
 
             {% for store in stores %}
                 <ul>

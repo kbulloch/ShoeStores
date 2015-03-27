@@ -14,6 +14,10 @@
     <div class="container">
         <h1><em>The</em> {{ store.getName }} <em>Store</em></h1>
 
+        <form action="/store/{{ store.getId }}/edit" method="get">
+            <button type="link" class="btn btn-info btn-xs">EDIT</button>
+        </form>
+
         <form action="/store/{{ store.getId }}/add_brand" method="post">
             <div class="form-group">
                 <label for="brand">Enter a brand</label>
@@ -21,8 +25,6 @@
             </div>
             <button type="submit" class="btn btn-success">Add Brand</button>
         </form>
-
-
 
         {% if brands is not empty %}
             <h4>We are proud to carry these brands:</h4>
@@ -34,6 +36,8 @@
         {% else %}
             <h4>This store carries no brands yet</h4>
         {% endif %}
+
+
     </div>
 </body>
 </html>
