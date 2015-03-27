@@ -1,11 +1,21 @@
 <html>
 <head>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <title>The {{ store.getName }} Page</title>
+    <title>The {{ store.getName }} Store Page</title>
 </head>
 <body>
     <div class="container">
         <h1>{{ store.getName }}</h1>
+
+        <form action="/store/{{ store.getId }}/add_brand" method="post">
+            <div class="form-group">
+                <label for="brand">Enter a brand</label>
+                <input type="text" name="brand" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Add Brand</button>
+        </form>
+
+
 
         {% if brands is not empty %}
             <h4>We are proud to carry these brands:</h4>

@@ -1,0 +1,29 @@
+<html>
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <title>The {{ brand.getName }} Brand Page</title>
+</head>
+<body>
+    <div class="container">
+        <h1>The {{ brand.getName }} Brand Page</h1>
+
+        <form action="/brand/{{ brand.getId }}/add_store" method="post">
+            <div class="form-group">
+                <label for="store">Add this brand to a new store's listings</label>
+                <input type="text" name="store" class="form-control">
+            </div>
+            <button type="submit">List it</button>
+        </form>
+
+        {% if stores is not empty %}
+            {% for store in stores %}
+                <ul>
+                    <li><a href="/store/{{ store.getId }}">{{ store.getName }}</a></li>
+                </ul>
+            {% endfor %}
+        {% else %}
+            <h4>There are no stores carrying this brand yet</h4>
+        {% endif %}
+    </div>
+</body>
+</html>
