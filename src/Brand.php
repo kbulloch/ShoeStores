@@ -42,8 +42,21 @@
 
         function addStore($new_store)
         {
-            $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id)
-                                  VALUES ({$this->getId()}, {$new_store->getId()});");
+            //check for existing store
+            //to avoid duplicate entries in database
+            $existing_store = Store::findByName($new_store->getName());
+
+            if($existing_store == null){
+                $new_store->save();
+                $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id)
+                                      VALUES ({$this->getId()}, {$new_store->getId()});");
+            }
+            else {
+                $GLOBALS['DB']->exec("INSERT INTO brands_stores (brand_id, store_id)
+                                      VALUES ({$this->getId()}, {$existing_store->getId()});");
+            }
+
+
         }
 
         function getStores()

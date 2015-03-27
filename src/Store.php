@@ -105,5 +105,18 @@
             }
             return $found_store;
         }
+
+        static function findByName($search_name)
+        {
+            $found_store = null;
+            $all_stores = Category::getAll();
+            foreach($all_stores as $store){
+                $store_name = $store->getName();
+                if ($store_name == $search_name){
+                    $found_store = $store;
+                }
+            }
+            return $found_store;
+        }
     }
 ?>

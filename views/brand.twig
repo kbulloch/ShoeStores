@@ -4,15 +4,22 @@
     <title>The {{ brand.getName }} Brand Page</title>
 </head>
 <body>
+    <nav class="navbar navbar-default navbar-top">
+        <div class="container">
+            <h5><a href="/">Home</a> |
+                <a href="/all_stores">Stores</a> |
+                <a href="/all_brands">Brands</a> </h5>
+        </div>
+    </nav>
     <div class="container">
         <h1>The {{ brand.getName }} Brand Page</h1>
 
         <form action="/brand/{{ brand.getId }}/add_store" method="post">
             <div class="form-group">
-                <label for="store">Add this brand to a new store's listings</label>
+                <label for="store">Add a store listing</label>
                 <input type="text" name="store" class="form-control">
             </div>
-            <button type="submit">List it</button>
+            <button type="submit" class="btn btn-success">List it</button>
         </form>
 
         {% if stores is not empty %}
